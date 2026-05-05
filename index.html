@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>4EverRemember — Wireframes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-mid: #4a4a4a;
+    --ink-soft: #777;
+    --ink-faint: #aaa;
+    --line: #1a1a1a;
+    --line-soft: #cfcfcf;
+    --bg: #ffffff;
+    --bg-warm: #f7f4ee;
+    --bg-panel: #f3f3f0;
+    --bg-app: #e8e6e1;
+    --green: #18B57A;
+    --purple: #A78BFA;
+    --amber: #F59E0B;
+    --teal: #34CFBE;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-app);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  /* ========== TAB BAR ========== */
+  .tabbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #111;
+    color: #fff;
+    padding: 14px 24px;
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    border-bottom: 1px solid #000;
+  }
+  .tabbar .brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: #fff;
+    margin-right: auto;
+  }
+  .tabbar .brand .sub { color: #888; font-weight: 400; margin-left: 10px; }
+  .tabbar button {
+    background: transparent;
+    border: 1px solid #333;
+    color: #bbb;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 8px 14px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 0;
+  }
+  .tabbar button:hover { color: #fff; border-color: #666; }
+  .tabbar button.active {
+    background: #fff;
+    color: #111;
+    border-color: #fff;
+  }
+
+  /* ========== PAGE CANVAS ========== */
+  .page {
+    display: none;
+    max-width: 1440px;
+    margin: 32px auto;
+    background: var(--bg);
+    border: 1.5px solid var(--line);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+  }
+  .page.active { display: block; }
+  .page-label {
+    max-width: 1440px;
+    margin: 32px auto 8px;
+    padding: 0 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .page-label .path { color: var(--ink); font-weight: 500; }
+
+  /* ========== SECTION ========== */
+  .section {
+    border-bottom: 1.5px solid var(--line);
+    padding: 48px 72px;
+    position: relative;
+  }
+  .section:last-child { border-bottom: none; }
+  .section.warm { background: var(--bg-warm); }
+  .section.dark { background: #222; color: #ddd; }
+  .section-tag {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ========== NAV BAR (within page) ========== */
+  .navbar {
+    display: flex;
+    align-items: center;
+    padding: 18px 72px;
+    border-bottom: 1.5px solid var(--line);
+    background: var(--bg);
+    gap: 40px;
+  }
+  .navbar .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+  }
+  .navbar .logo::before {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--ink);
+    margin-right: 10px;
+    vertical-align: -6px;
+    background: linear-gradient(135deg, transparent 48%, var(--ink) 48%, var(--ink) 52%, transparent 52%),
+                linear-gradient(45deg, transparent 48%, var(--ink) 48%, var(--ink) 52%, transparent 52%);
+  }
+  .navbar .nav-links {
+    display: flex;
+    gap: 28px;
+    margin-left: 20px;
+  }
+  .navbar .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+  }
+  .navbar .nav-links a.current { font-weight: 600; border-bottom: 1.5px solid var(--ink); padding-bottom: 2px; }
+  .navbar .nav-right {
+    margin-left: auto;
+    display: flex;
+    gap: 12px;
+  }
+
+  /* ========== BUTTONS ========== */
+  .btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border: 1.5px solid var(--ink);
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .btn.primary { background: var(--ink); color: #fff; }
+  .btn.ghost { background: transparent; }
+  .btn.large { padding: 14px 22px; font-size: 14px; }
+  .btn.small { padding: 7px 12px; font-size: 12px; }
+  .btn-inline {
+    text-decoration: underline;
+    color: var(--ink);
+    font-size: 13px;
+  }
+
+  /* ========== TYPE ========== */
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  h1.wf { font-size: 48px; line-height: 1.1; margin: 0 0 16px; font-weight: 500; letter-spacing: -1px; font-family: 'Inter', serif; font-style: italic; }
+  h2.wf { font-size: 34px; line-height: 1.15; margin: 0 0 14px; font-weight: 500; letter-spacing: -0.5px; font-style: italic; font-family: 'Inter', serif; }
+  h3.wf { font-size: 20px; margin: 0 0 10px; font-weight: 600; }
+  p.wf { color: var(--ink-mid); margin: 0 0 14px; max-width: 56ch; }
+
+  /* ========== PLACEHOLDERS ========== */
+  .ph-img {
+    background: #efece6;
+    border: 1.5px solid var(--line);
+    position: relative;
+    overflow: hidden;
+    color: var(--ink-soft);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8px;
+  }
+  .ph-img::before, .ph-img::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top right, transparent calc(50% - 1px), var(--line-soft) calc(50% - 1px), var(--line-soft) calc(50% + 1px), transparent calc(50% + 1px));
+    pointer-events: none;
+  }
+  .ph-img::after {
+    background: linear-gradient(to top left, transparent calc(50% - 1px), var(--line-soft) calc(50% - 1px), var(--line-soft) calc(50% + 1px), transparent calc(50% + 1px));
+  }
+  .ph-img span { position: relative; z-index: 1; background: rgba(239,236,230,0.9); padding: 2px 8px; }
+
+  .ph-video {
+    background: #1f1f1f;
+    color: #888;
+  }
+  .ph-video::before, .ph-video::after {
+    background: linear-gradient(to top right, transparent calc(50% - 1px), #333 calc(50% - 1px), #333 calc(50% + 1px), transparent calc(50% + 1px));
+  }
+  .ph-video::after {
+    background: linear-gradient(to top left, transparent calc(50% - 1px), #333 calc(50% - 1px), #333 calc(50% + 1px), transparent calc(50% + 1px));
+  }
+  .ph-video span { background: rgba(31,31,31,0.9); color: #aaa; }
+
+  .ph-icon {
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--ink-soft);
+  }
+  .ph-icon.sm { width: 28px; height: 28px; font-size: 8px; }
+  .ph-icon.lg { width: 56px; height: 56px; font-size: 10px; }
+
+  /* Color swatch tag for pillars */
+  .swatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .swatch .dot {
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--ink);
+    display: inline-block;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    padding: 0;
+    border-bottom: 1.5px solid var(--line);
+    position: relative;
+  }
+  .hero-inner {
+    min-height: 620px;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    color: #333;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+  .hero-bg-label::before, .hero-bg-label::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top right, transparent calc(50% - 1px), #2a2a2a calc(50% - 1px), #2a2a2a calc(50% + 1px), transparent calc(50% + 1px));
+  }
+  .hero-bg-label::after {
+    background: linear-gradient(to top left, transparent calc(50% - 1px), #2a2a2a calc(50% - 1px), #2a2a2a calc(50% + 1px), transparent calc(50% + 1px));
+  }
+  .hero-bg-label span { position: relative; background: #1a1a1a; padding: 4px 14px; }
+  .hero-content { position: relative; z-index: 2; max-width: 620px; }
+  .hero .eyebrow { color: #aaa; }
+  .hero h1 { color: #fff; font-size: 56px; line-height: 1.05; margin-bottom: 20px; font-style: italic; font-weight: 400; }
+  .hero p { color: #ccc; font-size: 17px; margin-bottom: 32px; max-width: 50ch; }
+  .hero .btn { border-color: #fff; }
+  .hero .btn.primary { background: #fff; color: #111; }
+  .hero .btn.ghost { color: #fff; background: transparent; }
+
+  /* ========== GRIDS ========== */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .section-header { margin-bottom: 40px; max-width: 720px; }
+  .section-header.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+  /* ========== CARDS ========== */
+  .card {
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    padding: 24px;
+    position: relative;
+  }
+  .card.warm { background: var(--bg-warm); }
+  .card .icon-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+
+  .pillar-card {
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .pillar-card .img-slot { height: 180px; border-bottom: 1.5px solid var(--line); }
+  .pillar-card .body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+  .pillar-card .body .bottom { margin-top: auto; padding-top: 16px; }
+  .pillar-card .tag-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .pillar-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--ink);
+    padding: 3px 8px;
+    color: var(--ink);
+  }
+
+  /* ========== STEPS ========== */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .step {
+    padding: 0 32px;
+    border-right: 1.5px dashed var(--line-soft);
+  }
+  .step:last-child { border-right: none; padding-right: 0; }
+  .step:first-child { padding-left: 0; }
+  .step-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+
+  /* ========== SECURITY CARDS ========== */
+  .sec-card .checks {
+    list-style: none;
+    padding: 16px 0 0;
+    margin: 0;
+    border-top: 1px dashed var(--line-soft);
+    margin-top: 18px;
+  }
+  .sec-card .checks li {
+    font-size: 13px;
+    color: var(--ink-mid);
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .sec-card .checks li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* ========== TESTIMONIALS ========== */
+  .testi {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 20px;
+    padding: 24px;
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+  }
+  .testi .quote-mark {
+    font-family: Georgia, serif;
+    font-size: 48px;
+    line-height: 1;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .testi .ph-img { height: 120px; }
+  .testi .author { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line-soft); }
+  .testi .author strong { display: block; font-size: 14px; }
+  .testi .author span { font-size: 12px; color: var(--ink-soft); }
+  .stars { font-size: 13px; letter-spacing: 2px; margin-top: 6px; color: var(--ink); }
+
+  /* ========== PRICING ========== */
+  .price-card {
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
+  }
+  .price-card.featured {
+    background: var(--bg-warm);
+    border-width: 2.5px;
+    position: relative;
+  }
+  .price-card .ribbon {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--ink);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+  .price-card .plan-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .price-card .plan-name {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .price-card .price {
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -1px;
+  }
+  .price-card .period { font-size: 13px; color: var(--ink-soft); margin-bottom: 16px; }
+  .price-card p { font-size: 13px; color: var(--ink-mid); flex: 1; }
+  .price-card .btn { margin-top: 14px; text-align: center; }
+
+  /* ========== COMPARISON TABLE ========== */
+  .compare {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 13px;
+  }
+  .compare th, .compare td {
+    border: 1px solid var(--line-soft);
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .compare th {
+    background: var(--bg-panel);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .compare th:first-child { text-align: left; }
+  .compare td.c { text-align: center; }
+  .compare th.c { text-align: center; }
+  .compare tr:nth-child(even) td { background: #fafaf8; }
+
+  /* ========== FAQ ========== */
+  .faq-item {
+    border-bottom: 1px dashed var(--line-soft);
+    padding: 16px 0;
+  }
+  .faq-item:first-child { border-top: 1px dashed var(--line-soft); }
+  .faq-q { font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+  .faq-q::before { content: 'Q.'; font-family: 'JetBrains Mono', monospace; color: var(--ink-soft); margin-right: 8px; font-size: 12px; }
+  .faq-a { color: var(--ink-mid); font-size: 13px; max-width: 75ch; }
+  .faq-a::before { content: 'A.'; font-family: 'JetBrains Mono', monospace; color: var(--ink-soft); margin-right: 8px; font-size: 12px; }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    background: #1a1a1a;
+    color: #ccc;
+    padding: 48px 72px 24px;
+    border-top: 1.5px solid var(--line);
+  }
+  .footer .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #333;
+  }
+  .footer h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #888;
+    margin: 0 0 14px;
+    font-weight: 500;
+  }
+  .footer .brand-name { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 10px; }
+  .footer ul { list-style: none; padding: 0; margin: 0; }
+  .footer li { margin-bottom: 8px; font-size: 13px; }
+  .footer a { color: #ccc; text-decoration: none; }
+  .footer .socials { display: flex; gap: 10px; }
+  .footer .socials .ph-icon { border-color: #555; color: #888; }
+  .footer .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    font-size: 12px;
+    color: #777;
+  }
+
+  /* ========== RESOURCES ========== */
+  .res-category {
+    margin-bottom: 40px;
+  }
+  .res-category h3 {
+    border-bottom: 1.5px solid var(--line);
+    padding-bottom: 10px;
+    margin: 0 0 20px;
+    font-size: 18px;
+  }
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .res-item {
+    border: 1.5px solid var(--line);
+    padding: 20px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+  .res-item .res-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+  .res-item h4 { margin: 0 0 6px; font-size: 15px; font-weight: 600; }
+  .res-item .meta { color: var(--ink-soft); font-size: 12px; margin-bottom: 10px; }
+  .res-item p { font-size: 13px; color: var(--ink-mid); flex: 1; margin: 0 0 14px; }
+
+  /* ========== BENEFIT BOX ========== */
+  .benefit {
+    border: 1.5px solid var(--line);
+    padding: 18px;
+    background: var(--bg);
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .benefit .check {
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .benefit strong { display: block; font-size: 14px; margin-bottom: 3px; }
+  .benefit p { margin: 0; font-size: 13px; color: var(--ink-mid); }
+
+  /* page title */
+  .page-title {
+    padding: 64px 72px 40px;
+    border-bottom: 1.5px solid var(--line);
+    background: var(--bg-warm);
+  }
+  .page-title h1 { margin-bottom: 10px; }
+  .page-title p { font-size: 17px; color: var(--ink-mid); max-width: 60ch; }
+
+  /* pillar detail card (full, /pillars page) */
+  .pillar-detail {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    border: 1.5px solid var(--line);
+    padding: 32px;
+    background: var(--bg);
+    margin-bottom: 24px;
+  }
+  .pillar-detail .left .ph-img { height: 220px; margin-bottom: 16px; }
+  .pillar-detail .included { list-style: none; padding: 0; margin: 0; }
+  .pillar-detail .included li {
+    padding: 8px 0 8px 22px;
+    border-bottom: 1px dashed var(--line-soft);
+    position: relative;
+    font-size: 13px;
+  }
+  .pillar-detail .included li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* utility */
+  .mt-8 { margin-top: 8px; } .mt-16 { margin-top: 16px; } .mt-24 { margin-top: 24px; } .mt-32 { margin-top: 32px; }
+  .mb-8 { margin-bottom: 8px; } .mb-16 { margin-bottom: 16px; } .mb-24 { margin-bottom: 24px; } .mb-32 { margin-bottom: 32px; }
+  .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .bullet-arrow { color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<!-- ============ TAB BAR ============ -->
+<div class="tabbar">
+  <div class="brand">4EVERREMEMBER <span class="sub">/ wireframes v1</span></div>
+  <button class="tab-btn active" data-page="home">01 — Homepage</button>
+  <button class="tab-btn" data-page="services">02 — /Services</button>
+  <button class="tab-btn" data-page="pricing">03 — /Pricing</button>
+  <button class="tab-btn" data-page="company">04 — /Our Company</button>
+  <button class="tab-btn" data-page="resources">05 — /Resources</button>
+</div>
+
+<!-- ============ HOMEPAGE ============ -->
+<div class="page-label"><span class="path">01 / HOMEPAGE</span><span>Desktop · 1440px</span></div>
+<div class="page active" id="page-home">
+
+  <!-- NAV -->
+  <div class="navbar">
+    <div class="logo">4EverRemember</div>
+    <div class="nav-links">
+      <a href="#" class="current">Home</a>
+      <a href="#">Services</a>
+      <a href="#">Pricing</a>
+      <a href="#">Our Company</a>
+      <a href="#">Resources</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn primary small">Create your legacy</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-bg-label"><span>video background · person speaking · warm cinematic · scaleX(-1) · dark overlay</span></div>
+      <div class="hero-content">
+        <div class="eyebrow" data-tweak="heroEyebrow">The #1 digital legacy platform: where memories grow, stories deepen, identities are preserved and future messages endure</div>
+        <h1 data-tweak="heroTitle">Preserve your story forever.</h1>
+        <p data-tweak="heroSub">Create your digital legacy with AI. Your memories, your voice, your way — in one safe place for the people you love.</p>
+        <div class="row">
+          <a class="btn primary large">Start your legacy — free →</a>
+          <a class="btn ghost large">Explore the Services ↓</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 — WHY -->
+  <div class="section warm">
+    <div class="section-tag">§ 02 · Why</div>
+    <div class="grid-2">
+      <div>
+        <div class="eyebrow">Why 4EverRemember</div>
+        <h2 class="wf">Your story is worth telling — right now.</h2>
+        <p class="wf">Not someday. Not when you have time. The people who love you want to know your real self, your real stories. Let’s celebrate life.</p>
+        <a class="btn primary mt-16">Start telling yours →</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="card">
+          <div class="icon-row">
+            <div class="ph-icon">MIC</div>
+            <div class="swatch"><span style="color:var(--ink-faint);">icon · stroke SVG</span></div>
+          </div>
+          <h3 class="wf">Tell it your way</h3>
+          <p class="wf" style="margin:0;">Answer a few warm questions, record a video, or just write. No template, no pressure — your story unfolds at your own pace. Upload your pictures, videos, audio, easily and safely.</p>
+        </div>
+        <div class="card">
+          <div class="icon-row">
+            <div class="ph-icon">✦</div>
+            <div class="swatch"><span style="color:var(--ink-faint);">icon · stroke SVG</span></div>
+          </div>
+          <h3 class="wf">AI that truly listens</h3>
+          <p class="wf" style="margin:0;">Our dedicated AI-powered tools shapes your words into a beautiful biography, timeline and portrait — and keeps getting richer every time you add something new. This will be part of your legacy for the people you love.</p>
+        </div>
+        <div class="card">
+          <div class="icon-row">
+            <div class="ph-icon">USR</div>
+            <div class="swatch"><span style="color:var(--ink-faint);">icon · stroke SVG</span></div>
+          </div>
+          <h3 class="wf">Bring your family closer</h3>
+          <p class="wf" style="margin:0;">Invite the people you love to read, add their memories, and build the story together. Your circle, your rules.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 — 4 PILLARS -->
+  <div class="section">
+    <div class="section-tag">§ 03 · The 4 Pillars</div>
+    <div class="section-header">
+      <div class="eyebrow">Four Services for you</div>
+      <h2 class="wf">Four ways to preserve your story, your own way.</h2>
+      <p class="wf">Your Life Portrait; your Life Lessons; a Time Capsule and your Circle of Life. Each offers a different dimension of who you really are — your story, your love, your time, and your people. Pick where you want to start.</p>
+    </div>
+    <div class="grid-2x2">
+      <!-- Pillar 1 -->
+      <div class="pillar-card">
+        <div class="img-slot ph-img"><span>person reflecting · writing · rounded · overlay gradient</span></div>
+        <div class="body">
+          <div class="tag-row">
+            <div class="swatch"><span class="dot" style="background:#18B57A;"></span>GREEN · #18B57A</div>
+            <div class="pillar-tag">Your story, personality, values, voice</div>
+          </div>
+          <div class="row mb-16">
+            <div class="ph-icon sm">PRT</div>
+            <h3 class="wf" style="margin:0;">Life Portrait</h3>
+          </div>
+          <p class="wf">Capture your story, experiences, and life moments — in your own words, guided by a warm AI that listens. From childhood memories to career milestones, from family to faith, tell the chapters that shaped who you are.</p>
+          <div class="bottom"><a class="btn-inline">Learn more →</a></div>
+        </div>
+      </div>
+      <!-- Pillar 2 -->
+      <div class="pillar-card">
+        <div class="img-slot ph-img"><span>multi-generational family moment · rounded · overlay gradient</span></div>
+        <div class="body">
+          <div class="tag-row">
+            <div class="swatch"><span class="dot" style="background:#A78BFA;"></span>PURPLE · #A78BFA</div>
+            <div class="pillar-tag">Life Lessons shouldn’t be lost</div>
+          </div>
+          <div class="row mb-16">
+            <div class="ph-icon sm">♥</div>
+            <h3 class="wf" style="margin:0;">My Legacy</h3>
+          </div>
+          <p class="wf">Your life experience becomes wisdom for your loved ones. Share life lessons, and memories with the people you love. They add photos, videos, and letters too — building your story together. Turn family memories and traditions into heirlooms.</p>
+          <div class="bottom"><a class="btn-inline">Learn more →</a></div>
+        </div>
+      </div>
+      <!-- Pillar 3 -->
+      <div class="pillar-card">
+        <div class="img-slot ph-img"><span>person writing letter · journaling · rounded · overlay gradient</span></div>
+        <div class="body">
+          <div class="tag-row">
+            <div class="swatch"><span class="dot" style="background:#F59E0B;"></span>AMBER · #F59E0B</div>
+            <div class="pillar-tag">Private, time-locked messages</div>
+          </div>
+          <div class="row mb-16">
+            <div class="ph-icon sm">⏱</div>
+            <h3 class="wf" style="margin:0;">Time Capsule</h3>
+          </div>
+          <p class="wf">Record a video; Write messages and letters that will be opened in the future — a graduation, an anniversary, a birthday. Messages that matter when they matter most. Leave words for moments you won’t be there.</p>
+          <div class="bottom"><a class="btn-inline">Learn more →</a></div>
+        </div>
+      </div>
+      <!-- Pillar 4 -->
+      <div class="pillar-card">
+        <div class="img-slot ph-img"><span>diverse group of people smiling · rounded · overlay gradient</span></div>
+        <div class="body">
+          <div class="tag-row">
+            <div class="swatch"><span class="dot" style="background:#34CFBE;"></span>TEAL · #34CFBE</div>
+            <div class="pillar-tag">Your people, community, passions</div>
+          </div>
+          <div class="row mb-16">
+            <div class="ph-icon sm">USR</div>
+            <h3 class="wf" style="margin:0;">My Circle of Life</h3>
+          </div>
+          <p class="wf">Invite family and friends to be part of your story. Build a shared space where memories, photos, and tributes flow together naturally. Your legacy grows with every voice that loves you.</p>
+          <div class="bottom"><a class="btn-inline">Learn more →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 — HOW IT WORKS -->
+  <div class="section warm">
+    <div class="section-tag">§ 04 · How it works</div>
+    <div class="section-header center" style="text-align:center;">
+      <div class="eyebrow">How It Works</div>
+      <h2 class="wf" style="margin-left:auto;margin-right:auto;">From your story to your legacy, sooner than you think.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="row mb-16">
+          <div class="ph-icon">💬</div>
+          <div class="step-number">01</div>
+        </div>
+        <h3 class="wf">Tell the AI your story</h3>
+        <p class="wf">Answer a few gentle, guided questions about your life — no pressure, just your story, in your own words. Choose from video, voice, or text. Your choice.</p>
+      </div>
+      <div class="step">
+        <div class="row mb-16">
+          <div class="ph-icon">📖</div>
+          <div class="step-number">02</div>
+        </div>
+        <h3 class="wf">Watch your legacy take shape</h3>
+        <p class="wf">AI weaves your memories into a biography, timeline, mural, and beautiful visual portrait — organized and alive. You can also create your own webpage, for ever remember. See your life story come together in ways that surprise you.</p>
+      </div>
+      <div class="step">
+        <div class="row mb-16">
+          <div class="ph-icon">♥</div>
+          <div class="step-number">03</div>
+        </div>
+        <h3 class="wf">Share with those you love</h3>
+        <p class="wf">Invite family and friends to add their stories, photos, and memories. Your legacy grows together over time. Everyone sees what you choose to share.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 — SECURITY -->
+  <div class="section">
+    <div class="section-tag">§ 05 · Security & privacy</div>
+    <div class="section-header">
+      <div class="eyebrow">Security & Privacy</div>
+      <h2 class="wf">Your story, completely safe.</h2>
+      <p class="wf">Everything you share on this platform belongs entirely to you. Your memories, photos, reflections, and messages remain under your control at all times. Your memories are sacred. We protect them by using strong encryption and secure authentication methods.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card sec-card">
+        <div class="icon-row">
+          <div class="ph-icon">🔒</div>
+          <div class="swatch"><span class="dot" style="background:#34CFBE;"></span>TEAL</div>
+        </div>
+        <h3 class="wf">Encryption & security</h3>
+        <p class="wf" style="font-size:13px;">End-to-end encryption on everything you save. We protect your memories with the same level of security used by banks and healthcare systems.</p>
+        <ul class="checks">
+          <li>Two-factor authentication system</li>
+          <li>Login alerts; full data export and deletion</li>
+          <li>Encryption in transit and at rest</li>
+        </ul>
+      </div>
+      <div class="card sec-card">
+        <div class="icon-row">
+          <div class="ph-icon">⏱</div>
+          <div class="swatch"><span class="dot" style="background:#A78BFA;"></span>PURPLE</div>
+        </div>
+        <h3 class="wf">Long-term storage</h3>
+        <p class="wf" style="font-size:13px;">Your story will be preserved safely over the long-term. Download ownership guaranteed. Post-mortem access designed with care for your heirs.</p>
+        <ul class="checks">
+          <li>Long-term preservation</li>
+          <li>Digital Executor designation</li>
+          <li>Transparent Terms of Services</li>
+        </ul>
+      </div>
+      <div class="card sec-card">
+        <div class="icon-row">
+          <div class="ph-icon">🛡</div>
+          <div class="swatch"><span class="dot" style="background:#18B57A;"></span>GREEN</div>
+        </div>
+        <h3 class="wf">Privacy first</h3>
+        <p class="wf" style="font-size:13px;">You control who sees what. No data selling, no ads, no algorithms exploiting your memories. Your story is yours.</p>
+        <ul class="checks">
+          <li>Granular permissions</li>
+          <li>No ads, ever</li>
+          <li>Full data export / deletion</li>
+          <li>Transparent Privacy Policy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 — TESTIMONIALS -->
+  <div class="section warm">
+    <div class="section-tag">§ 06 · Testimonials</div>
+    <div class="section-header">
+      <div class="eyebrow">What families say</div>
+      <h2 class="wf">Real stories. Real families.</h2>
+      <p class="wf">Your life experience matters. You need what you’ve lived. Life lessons shouldn’t be lost.</p>
+    </div>
+    <div class="grid-3">
+      <div class="testi">
+        <div class="ph-img"><span>Woman · 60s</span></div>
+        <div>
+          <div class="quote-mark" style="color:#18B57A;">"</div>
+          <p class="wf" style="font-size:14px;">We captured my father's stories just months before he passed. Now his grandchildren can hear his voice whenever they want.</p>
+          <div class="stars" style="color:#18B57A;">★★★★★</div>
+          <div class="author">
+            <strong>Susan Mitchell</strong>
+            <span>Grandmother of three · Florida</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi">
+        <div class="ph-img"><span>Man · 55s</span></div>
+        <div>
+          <div class="quote-mark" style="color:#A78BFA;">"</div>
+          <p class="wf" style="font-size:14px;">I spent one afternoon with my mom recording her memories. That afternoon became our most treasured family heirloom. Now my grandkids will know their roots.</p>
+          <div class="stars" style="color:#A78BFA;">★★★★★</div>
+          <div class="author">
+            <strong>James Rodriguez</strong>
+            <span>Son & caretaker · California</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi">
+        <div class="ph-img"><span>Woman · 70s</span></div>
+        <div>
+          <div class="quote-mark" style="color:#F59E0B;">"</div>
+          <p class="wf" style="font-size:14px;">My grandmother didn't think her life was interesting. Now we have 200 pages of stories that prove otherwise.</p>
+          <div class="stars" style="color:#F59E0B;">★★★★★</div>
+          <div class="author">
+            <strong>Maria Chen</strong>
+            <span>Granddaughter · Texas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 — PRICING -->
+  <div class="section">
+    <div class="section-tag">§ 07 · Pricing</div>
+    <div class="section-header" style="display:flex; justify-content:space-between; align-items:flex-end; max-width:none;">
+      <div>
+        <div class="eyebrow">Upgrade When Ready</div>
+        <h2 class="wf" style="margin-bottom:0;">Pick the forever that fits you.</h2>
+      </div>
+      <a class="btn-inline">See full pricing & comparison →</a>
+    </div>
+    <div class="grid-4" style="margin-top:20px;">
+      <div class="price-card">
+        <div class="plan-tag">Perfect to start</div>
+        <div class="plan-name">Free</div>
+        <div class="price">Forever</div>
+        <div class="period">No credit card</div>
+        <p>Start capturing your story. Timeline, basic mural (10 photos), and guided questions to begin. Limited AI generation. Max 500 MB storage. 10 voice minutes/month; 1 minute video max.</p>
+        <a class="btn ghost">Start free now</a>
+      </div>
+      <div class="price-card featured">
+        <div class="ribbon">Most popular</div>
+        <div class="plan-tag">Most popular</div>
+        <div class="plan-name">Premium</div>
+        <div class="price">$9.99</div>
+        <div class="period">/month</div>
+        <p>25 GB storage, full AI story tools, 60 voice minutes/month; 4 minute video max, timeline builder, and monthly revisions.</p>
+        <a class="btn primary">Choose Premium</a>
+      </div>
+      <div class="price-card">
+        <div class="plan-tag">For legacy builders</div>
+        <div class="plan-name">Platinum</div>
+        <div class="price">$19.99</div>
+        <div class="period">/month</div>
+        <p>100 GB storage; 4k videos; 120 voice minutes/month; custom subdomain; advanced sharing.</p>
+        <a class="btn ghost">Choose Platinum</a>
+      </div>
+      <div class="price-card">
+        <div class="plan-tag">Best value · Most popular</div>
+        <div class="plan-name">Family Plan</div>
+        <div class="price">$35</div>
+        <div class="period">/month</div>
+        <p>For five members; shared family vault; 250-300 GB shared storage; shared timeline; collaborative story-telling; multi-user uploads; shared family tree.</p>
+        <a class="btn ghost">Choose Family Plan</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8 — START FREE CTA -->
+  <div class="section warm">
+    <div class="section-tag">§ 08 · Start free CTA</div>
+    <div class="grid-2">
+      <div>
+        <div class="eyebrow">Start Free</div>
+        <h2 class="wf">Begin your legacy today — no credit card.</h2>
+        <p class="wf">Everything you need to start capturing your story. Upgrade anytime.</p>
+        <div class="row mt-16">
+          <a class="btn primary large">Start free now →</a>
+          <a class="btn ghost large">See what's included</a>
+        </div>
+      </div>
+      <div>
+        <div class="benefit">
+          <div class="check" style="background:#e6f7ef;">✓</div>
+          <div>
+            <strong>In a few minutes</strong>
+            <p>Answer guided questions about your life — in your own words. Dedicated AI-powered tools for you.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="check" style="background:#f0ebff;">✓</div>
+          <div>
+            <strong>See instant results</strong>
+            <p>Your timeline and biography take shape as you speak. We can develop your personal webpage.</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <div class="check" style="background:#fef3dc;">✓</div>
+          <div>
+            <strong>Cancel anytime</strong>
+            <p>Upgrade only if and when you're ready — never pressured.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9 — FINAL CTA -->
+  <div class="section" style="text-align:center;">
+    <div class="section-tag">§ 09 · Final CTA</div>
+    <div style="max-width: 620px; margin: 40px auto;">
+      <div class="eyebrow" style="text-align:center;">Your Turn</div>
+      <h2 class="wf" style="font-size:42px;">Ready to preserve your story?</h2>
+      <div class="row" style="justify-content:center; margin: 24px 0 12px;">
+        <a class="btn primary large">Start your legacy — free →</a>
+      </div>
+      <p class="wf" style="font-size:13px; color:var(--ink-soft); margin: 0 auto;">Free forever plan · No credit card</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="brand-name">4EverRemember</div>
+        <p style="color:#aaa; font-size:13px; margin:0 0 10px; max-width:32ch;">Preserve your story for the people you love.</p>
+        <p style="color:#ccc; font-size:13px; margin:0;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb3beb7b7b49befbeadbea9a9beb6beb6b9bea9f5b8b4b6">[email&#160;protected]</a></p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a>Features</a></li>
+          <li><a>Pricing</a></li>
+          <li><a>Resources</a></li>
+          <li><a>Privacy</a></li>
+          <li><a>Terms of Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <div class="socials">
+          <div class="ph-icon sm">X</div>
+          <div class="ph-icon sm">IG</div>
+          <div class="ph-icon sm">IN</div>
+          <div class="ph-icon sm">FB</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 4EverRemember. All rights reserved.</div>
+      <div>Developed by Clarika</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ /PILLARS PAGE ============ -->
+<div class="page-label" style="display:none;" id="label-pillars"><span class="path">02 / /SERVICES</span><span>Desktop · 1440px</span></div>
+<div class="page" id="page-pillars">
+  <!-- NAV -->
+  <div class="navbar">
+    <div class="logo">4EverRemember</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#" class="current">Services</a>
+      <a href="#">Pricing</a>
+      <a href="#">Our Company</a>
+      <a href="#">Resources</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn primary small">Create your legacy</a>
+    </div>
+  </div>
+
+  <div class="page-title">
+    <div class="eyebrow">Our Services for You</div>
+    <h1 class="wf">The 4 Services of Your Legacy</h1>
+    <p>Everything you can create with 4EverRemember</p>
+  </div>
+
+  <div class="section">
+    <div class="section-tag">§ 01 · Pillar details</div>
+
+    <!-- PILLAR 1 -->
+    <div class="pillar-detail">
+      <div class="left">
+        <div class="ph-img"><span>Book/portrait · stroke SVG</span></div>
+        <div class="swatch"><span class="dot" style="background:#18B57A;"></span>GREEN · #18B57A · Your story</div>
+      </div>
+      <div>
+        <div class="row mb-8">
+          <div class="ph-icon">PRT</div>
+          <h2 class="wf" style="margin:0; font-size:28px;">Life Portrait</h2>
+        </div>
+        <p class="wf" style="font-weight:500; color:var(--ink); font-size:16px;">Your life, in your own words.</p>
+        <p class="wf">Answer guided questions about your childhood, adolescence, career, family, faith, and passions. AI transforms your answers into a beautiful biography, visual timeline, and photo mural. We can develop your own personal website, forever.</p>
+        <p class="wf" style="font-style:italic;"><strong>Result:</strong> Your complete life captured in a meaningful way.</p>
+        <div class="eyebrow mt-16">What's Included</div>
+        <ul class="included">
+          <li>Biography generated by AI</li>
+          <li>Visual timeline of your life</li>
+          <li>Photo mural (masonry layout)</li>
+          <li>Simulated interview video</li>
+          <li>Downloadable book</li>
+          <li>Your personal website</li>
+        </ul>
+        <div class="mt-16"><a class="btn primary">Explore →</a></div>
+      </div>
+    </div>
+
+    <!-- PILLAR 2 -->
+    <div class="pillar-detail">
+      <div class="left">
+        <div class="ph-img"><span>Heart/people · stroke SVG</span></div>
+        <div class="swatch"><span class="dot" style="background:#A78BFA;"></span>PURPLE · #A78BFA · Your love</div>
+      </div>
+      <div>
+        <div class="row mb-8">
+          <div class="ph-icon">♥</div>
+          <h2 class="wf" style="margin:0; font-size:28px;">My Legacy</h2>
+        </div>
+        <p class="wf" style="font-weight:500; color:var(--ink); font-size:16px;">Life lessons shouldn’t be lost. A place to reflect, not perform — together.</p>
+        <p class="wf">Your story matters. This could be your true legacy. And this is a place where life experience becomes wisdom for your loved ones. Then your legacy grows over time, enriched by the perspectives and memories of those who love you.</p>
+        <p class="wf" style="font-style:italic;"><strong>Result:</strong> A living legacy that evolves and deepens.</p>
+        <div class="eyebrow mt-16">What's Included</div>
+        <ul class="included">
+          <li>Record videos with life lessons and untold stories</li>
+          <li>Write a letter to a loved one</li>
+          <li>Invite heirs and family to share stories</li>
+          <li>Collaborative mural</li>
+        </ul>
+        <div class="mt-16"><a class="btn primary">Explore →</a></div>
+      </div>
+    </div>
+
+    <!-- PILLAR 3 -->
+    <div class="pillar-detail">
+      <div class="left">
+        <div class="ph-img"><span>Clock · stroke SVG</span></div>
+        <div class="swatch"><span class="dot" style="background:#F59E0B;"></span>AMBER · #F59E0B · Your time</div>
+      </div>
+      <div>
+        <div class="row mb-8">
+          <div class="ph-icon">⏱</div>
+          <h2 class="wf" style="margin:0; font-size:28px;">Time Capsule</h2>
+        </div>
+        <p class="wf" style="font-weight:500; color:var(--ink); font-size:16px;">Messages that unlock in the future.</p>
+        <p class="wf">Record videos, write letters, or leave messages to be delivered on specific dates. They unlock on future birthdays, important anniversaries, or whenever you decide the moment is right.</p>
+        <p class="wf" style="font-style:italic;"><strong>Result:</strong> Continuous connection with your loved ones, even after you're gone.</p>
+        <div class="eyebrow mt-16">What's Included</div>
+        <ul class="included">
+          <li>Record private videos</li>
+          <li>Write personalized letters</li>
+          <li>Schedule unlocks by date</li>
+          <li>Messages for specific milestones</li>
+          <li>Life lessons for the future</li>
+        </ul>
+        <div class="mt-16"><a class="btn primary">Explore →</a></div>
+      </div>
+    </div>
+
+    <!-- PILLAR 4 -->
+    <div class="pillar-detail">
+      <div class="left">
+        <div class="ph-img"><span>Users/family tree · stroke SVG</span></div>
+        <div class="swatch"><span class="dot" style="background:#34CFBE;"></span>TEAL · #34CFBE · Your people</div>
+      </div>
+      <div>
+        <div class="row mb-8">
+          <div class="ph-icon">USR</div>
+          <h2 class="wf" style="margin:0; font-size:28px;">My Circle of Life</h2>
+        </div>
+        <p class="wf" style="font-weight:500; color:var(--ink); font-size:16px;">How you impacted others.</p>
+        <p class="wf">Document your family tree, recognize the people who shaped you, and how you shaped others. My Circle is a tribute to the relationships that define your life — your family, friends, community, and the human chain that continues.</p>
+        <p class="wf" style="font-style:italic;"><strong>Result:</strong> A network of human connections that inspires future generations.</p>
+        <div class="eyebrow mt-16">What's Included</div>
+        <ul class="included">
+          <li>Visual family tree</li>
+          <li>Family profiles</li>
+          <li>Tributes and stories</li>
+          <li>Documented relationships</li>
+          <li>Community mural (photos / videos)</li>
+        </ul>
+        <div class="mt-16"><a class="btn primary">Explore →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="section warm" style="text-align:center;">
+    <div class="section-tag">§ 02 · Bottom CTA</div>
+    <div style="max-width:600px; margin: 40px auto;">
+      <h2 class="wf">Ready to build your legacy?</h2>
+      <div class="row" style="justify-content:center; margin-top:20px;">
+        <a class="btn primary large">Start free now →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER (reused) -->
+  <div class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="brand-name">4EverRemember</div>
+        <p style="color:#aaa; font-size:13px; margin:0 0 10px; max-width:32ch;">Preserve your story for the people you love.</p>
+        <p style="color:#ccc; font-size:13px; margin:0;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147c7178787b54207162716666717971797671663a777b79">[email&#160;protected]</a></p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a>Features</a></li>
+          <li><a>Pricing</a></li>
+          <li><a>Resources</a></li>
+          <li><a>Privacy</a></li>
+          <li><a>Terms of Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <div class="socials">
+          <div class="ph-icon sm">X</div>
+          <div class="ph-icon sm">IG</div>
+          <div class="ph-icon sm">IN</div>
+          <div class="ph-icon sm">FB</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 4EverRemember. All rights reserved.</div>
+      <div>Developed by Clarika</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ /PRICING PAGE ============ -->
+<div class="page-label" style="display:none;" id="label-pricing"><span class="path">03 / /PRICING</span><span>Desktop · 1440px</span></div>
+<div class="page" id="page-pricing">
+  <div class="navbar">
+    <div class="logo">4EverRemember</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#" class="current">Pricing</a>
+      <a href="#">Our Company</a>
+      <a href="#">Resources</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn primary small">Create your legacy</a>
+    </div>
+  </div>
+
+  <div class="page-title">
+    <div class="eyebrow">Pricing</div>
+    <h1 class="wf">Simple, Transparent Pricing</h1>
+    <p>Choose the plan that fits your legacy</p>
+  </div>
+
+  <!-- PRICING CARDS -->
+  <div class="section">
+    <div class="section-tag">§ 01 · Plans</div>
+    <div class="grid-4" style="margin-top:16px;">
+      <div class="price-card">
+        <div class="plan-tag">Perfect to start</div>
+        <div class="plan-name">Free</div>
+        <div class="price">Forever</div>
+        <div class="period">No credit card</div>
+        <p>Start capturing your story. Timeline, basic mural (10 photos), and guided questions to begin. Limited AI generation. Max 500 MB storage. 10 voice minutes/month; 1 minute video max.</p>
+        <a class="btn ghost">Start free now</a>
+      </div>
+      <div class="price-card featured">
+        <div class="ribbon">Most popular</div>
+        <div class="plan-tag">Most popular</div>
+        <div class="plan-name">Premium</div>
+        <div class="price">$9.99</div>
+        <div class="period">/month</div>
+        <p>25 GB storage, full AI story tools, 60 voice minutes/month; 4 minute video max, timeline builder, and monthly revisions.</p>
+        <a class="btn primary">Choose Premium</a>
+      </div>
+      <div class="price-card">
+        <div class="plan-tag">For legacy builders</div>
+        <div class="plan-name">Platinum</div>
+        <div class="price">$19.99</div>
+        <div class="period">/month</div>
+        <p>100 GB storage; 4k videos; 120 voice minutes/month; custom subdomain; advanced sharing.</p>
+        <a class="btn ghost">Choose Platinum</a>
+      </div>
+      <div class="price-card">
+        <div class="plan-tag">Best value · Most popular</div>
+        <div class="plan-name">Family Plan</div>
+        <div class="price">$35</div>
+        <div class="period">/month</div>
+        <p>For five members; shared family vault; 250-300 GB shared storage; shared timeline; collaborative story-telling; multi-user uploads; shared family tree.</p>
+        <a class="btn ghost">Choose Family Plan</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="section warm">
+    <div class="section-tag">§ 02 · Comparison</div>
+    <div class="section-header">
+      <div class="eyebrow">Compare Plans</div>
+      <h2 class="wf">Everything, side by side.</h2>
+    </div>
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th class="c">Free</th>
+          <th class="c">Premium</th>
+          <th class="c">Platinum</th>
+          <th class="c">Family</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>AI-guided questions</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+        <tr><td>Timeline generation</td><td class="c">Basic</td><td class="c">Full</td><td class="c">Full</td><td class="c">Full</td></tr>
+        <tr><td>Biography writing</td><td class="c">—</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+        <tr><td>Photo mural</td><td class="c">10 photos</td><td class="c">Unlimited</td><td class="c">Unlimited</td><td class="c">Unlimited</td></tr>
+        <tr><td>Video interviews</td><td class="c">—</td><td class="c">—</td><td class="c">✓</td><td class="c">✓</td></tr>
+        <tr><td>Time capsules</td><td class="c">—</td><td class="c">Basic</td><td class="c">Advanced</td><td class="c">Advanced</td></tr>
+        <tr><td>Family circles</td><td class="c">—</td><td class="c">Up to 10</td><td class="c">Unlimited</td><td class="c">Unlimited</td></tr>
+        <tr><td>Video legacy messages</td><td class="c">—</td><td class="c">—</td><td class="c">✓</td><td class="c">✓</td></tr>
+        <tr><td>Priority support</td><td class="c">—</td><td class="c">—</td><td class="c">✓</td><td class="c">✓</td></tr>
+        <tr><td>Data export</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+        <tr><td>Long-term preservation</td><td class="c">—</td><td class="c">—</td><td class="c">—</td><td class="c">✓</td></tr>
+        <tr><td>Monthly revisions</td><td class="c">—</td><td class="c">✓</td><td class="c">✓</td><td class="c">✓</td></tr>
+        <tr><td>Post-mortem access</td><td class="c">—</td><td class="c">—</td><td class="c">—</td><td class="c">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section">
+    <div class="section-tag">§ 03 · FAQ</div>
+    <div class="section-header">
+      <div class="eyebrow">Frequently Asked Questions</div>
+      <h2 class="wf">Questions, answered.</h2>
+    </div>
+    <div style="max-width:900px;">
+      <div class="faq-item">
+        <div class="faq-q">Can I change plans anytime?</div>
+        <div class="faq-a">Yes. You can upgrade or downgrade your plan at any time. Changes take effect at your next billing cycle. No penalties.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens to my data if I cancel?</div>
+        <div class="faq-a">Your data stays with you. You can export everything anytime. If you cancel, you keep your Free plan access (limited features) or you can delete your account entirely.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I download my content?</div>
+        <div class="faq-a">Absolutely. You can export your full biography, timeline, photos, and all recorded materials as PDF or video files.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I need tech skills to use 4EverRemember?</div>
+        <div class="faq-a">No. The platform is designed to be simple and intuitive. Just answer questions, and AI handles the rest. If you need help, our support team is here.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How does post-mortem access work?</div>
+        <div class="faq-a">With Lifetime plans, you can designate heirs who can access your legacy after you're gone. You control exactly what they see and when.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is my data really secure and private?</div>
+        <div class="faq-a">Yes. We use AES-256 encryption, SOC 2 Type II certification, and GDPR compliance. Your data is audited annually. We never sell or share your information.</div>
+      </div>
+            <div class="faq-item">
+        <div class="faq-q">Is there a long-term contract?</div>
+        <div class="faq-a">No contracts. Monthly plans are month-to-month. Lifetime is one payment, forever. Cancel anytime with no penalties.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you offer customer support?</div>
+        <div class="faq-a">Free and Premium plans have email support. Platinum and Lifetime plans get priority support and phone access.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens to my legacy after I'm gone?</div>
+        <div class="faq-a">Your designated heirs get access according to your wishes. The legacy stays on our servers for 100 years (Lifetime plans). Family can continue adding memories and tributes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I share my legacy publicly?</div>
+        <div class="faq-a">Yes. You control sharing settings. You can make your legacy public, private, or share with specific people. You decide.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I don't like it? Can I get a refund?</div>
+        <div class="faq-a">Monthly plans: cancel anytime, no refund but no ongoing charges. Lifetime plan: 30-day money-back guarantee. No questions asked.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="section warm" style="text-align:center;">
+    <div class="section-tag">§ 04 · Bottom CTA</div>
+    <div style="max-width:600px; margin: 40px auto;">
+      <h2 class="wf">Ready to get started?</h2>
+      <div class="row" style="justify-content:center; margin-top:20px;">
+        <a class="btn primary large">Start free now →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="brand-name">4EverRemember</div>
+        <p style="color:#aaa; font-size:13px; margin:0 0 10px; max-width:32ch;">Preserve your story for the people you love.</p>
+        <p style="color:#ccc; font-size:13px; margin:0;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="721a171e1e1d32461704170000171f171f1017005c111d1f">[email&#160;protected]</a></p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a>Features</a></li>
+          <li><a>Pricing</a></li>
+          <li><a>Resources</a></li>
+          <li><a>Privacy</a></li>
+          <li><a>Terms of Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <div class="socials">
+          <div class="ph-icon sm">X</div>
+          <div class="ph-icon sm">IG</div>
+          <div class="ph-icon sm">IN</div>
+          <div class="ph-icon sm">FB</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 4EverRemember. All rights reserved.</div>
+      <div>Developed by Clarika</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============ /OUR COMPANY PAGE ============ -->
+<div class="page-label" style="display:none;" id="label-company"><span class="path">04 / /OUR COMPANY</span><span>Desktop · 1440px</span></div>
+<div class="page" id="page-company">
+  <div class="navbar">
+    <div class="logo">4EverRemember</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">Pricing</a>
+      <a href="#" class="current">Our Company</a>
+      <a href="#">Resources</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn primary small">Create your legacy</a>
+    </div>
+  </div>
+
+  <div class="page-title">
+    <div class="eyebrow">Our Company</div>
+    <h1 class="wf">Our mission, to preserve your story, forever</h1>
+    <p>4EverRemember is the #1 living digital legacy platform (powered by AI).</p>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section">
+    <div class="section-tag">§ 01 · Mission</div>
+    <div class="grid-2">
+      <div>
+        <div class="eyebrow">Why we exist</div>
+        <h2 class="wf">A modern, deeply human way to preserve who we are.</h2>
+        <p class="wf">The world lacks a meaningful, modern, deeply human way to preserve the stories, personalities, and memories of the people we love.</p>
+        <p class="wf">Traditional memorial sites are static and unable to capture the emotional depth of life. More importantly, current digital legacy tools are obituary-focused.</p>
+        <p class="wf">We are an American Company based in Delaware. Our purpose is to celebrate life and give you the tools to preserve your story in your own words. For you, for your loved ones, for generations to come.</p>
+      </div>
+      <div>
+        <div class="card">
+          <div class="eyebrow">Our aim</div>
+          <ul class="included" style="list-style:none; padding:0; margin-top:8px;">
+            <li>Capture personality, voice, humor, and values</li>
+            <li>Help the living shape how they want to be remembered</li>
+            <li>Store future messages or legacy content</li>
+            <li>Remain permanent, accessible, and secure</li>
+            <li>Evolve over time with contributions from loved ones</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUE PROPOSITION -->
+  <div class="section warm">
+    <div class="section-tag">§ 02 · What makes us different</div>
+    <div class="section-header">
+      <div class="eyebrow">Value Proposition</div>
+      <h2 class="wf">What makes us different from anyone else.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="step-number">01</div>
+        <h3 class="wf">Guided Storytelling Engine</h3>
+        <p class="wf" style="margin:0; font-size:13px;">AI-assisted prompts helping you record memories, insights, life lessons, and meaningful experiences in your own voice.</p>
+      </div>
+      <div class="card">
+        <div class="step-number">02</div>
+        <h3 class="wf">Multi-Format Memory Capture</h3>
+        <p class="wf" style="margin:0; font-size:13px;">Support for photos, videos, audio, diaries, scanned letters, playlists, and more.</p>
+      </div>
+      <div class="card">
+        <div class="step-number">03</div>
+        <h3 class="wf">Personality Portraits</h3>
+        <p class="wf" style="margin:0; font-size:13px;">A composite, narrative-driven representation combining traits, values, memories, and quotes.</p>
+      </div>
+      <div class="card">
+        <div class="step-number">04</div>
+        <h3 class="wf">Legacy Vault & Time Capsules</h3>
+        <p class="wf" style="margin:0; font-size:13px;">Messages and videos that unlock on future dates or milestones.</p>
+      </div>
+      <div class="card">
+        <div class="step-number">05</div>
+        <h3 class="wf">Living Legacy Mode</h3>
+        <p class="wf" style="margin:0; font-size:13px;">Annual reflections, recurring memories, and ongoing tributes make the legacy feel alive.</p>
+      </div>
+      <div class="card">
+        <div class="step-number">06</div>
+        <h3 class="wf">Advanced Privacy Controls</h3>
+        <p class="wf" style="margin:0; font-size:13px;">Public, private, invitation-based, and time-locked settings.</p>
+      </div>
+      <div class="card" style="grid-column: span 3;">
+        <div class="step-number">07</div>
+        <h3 class="wf">Trusted Contacts System</h3>
+        <p class="wf" style="margin:0; font-size:13px;">Designated individuals gain access after death to steward the legacy responsibly.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="section" style="text-align:center;">
+    <div class="section-tag">§ 03 · Bottom CTA</div>
+    <div style="max-width:600px; margin: 40px auto;">
+      <h2 class="wf">Ready to preserve your story?</h2>
+      <div class="row" style="justify-content:center; margin-top:20px;">
+        <a class="btn primary large">Start your legacy — free →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="brand-name">4EverRemember</div>
+        <p style="color:#aaa; font-size:13px; margin:0 0 10px; max-width:32ch;">Preserve your story for the people you love.</p>
+        <p style="color:#ccc; font-size:13px; margin:0;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="630b060f0f0c23570615061111060e060e0106114d000c0e">[email&#160;protected]</a></p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a>Features</a></li>
+          <li><a>Pricing</a></li>
+          <li><a>Resources</a></li>
+          <li><a>Privacy</a></li>
+          <li><a>Terms of Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <div class="socials">
+          <div class="ph-icon sm">X</div>
+          <div class="ph-icon sm">IG</div>
+          <div class="ph-icon sm">IN</div>
+          <div class="ph-icon sm">FB</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 4EverRemember. All rights reserved.</div>
+      <div>Developed by Clarika</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ /RESOURCES PAGE ============ -->
+<div class="page-label" style="display:none;" id="label-resources"><span class="path">05 / /RESOURCES</span><span>Desktop · 1440px</span></div>
+<div class="page" id="page-resources">
+  <div class="navbar">
+    <div class="logo">4EverRemember</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">Pricing</a>
+      <a href="#">Our Company</a>
+      <a href="#" class="current">Resources</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn primary small">Create your legacy</a>
+    </div>
+  </div>
+
+  <div class="page-title">
+    <div class="eyebrow">Resources</div>
+    <h1 class="wf">Recommended Resources</h1>
+    <p>Curated books, posts, articles & videos for your legacy journey</p>
+  </div>
+
+  <div class="section">
+    <div class="section-tag">§ 01 · Resources</div>
+
+    <!-- BOOKS -->
+    <div class="res-category">
+      <h3>📚 Books</h3>
+      <div class="res-grid">
+        <div class="res-item">
+          <div class="res-type">Book</div>
+          <h4>[Book Title]</h4>
+          <div class="meta">by [Author Name]</div>
+          <p>[Brief 1-2 sentence description of why it matters for legacy]</p>
+          <a class="btn-inline">Read more →</a>
+        </div>
+        <div class="res-item">
+          <div class="res-type">Book</div>
+          <h4>[Book Title]</h4>
+          <div class="meta">by [Author Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Read more →</a>
+        </div>
+        <div class="res-item">
+          <div class="res-type">Book</div>
+          <h4>[Book Title]</h4>
+          <div class="meta">by [Author Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Read more →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- POSTS -->
+    <div class="res-category">
+      <h3 style="font-size: 15px">📝 📝 Podcast</h3>
+      <div class="res-grid">
+        <div class="res-item">
+          <div class="res-type">Post</div>
+          <h4>
+
+{Podcast Title}</h4>
+          <div class="meta">from [Website/Blog Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Read post →</a>
+        </div>
+        <div class="res-item">
+          <div class="res-type">Post</div>
+          <h4>{Podcast Title}</h4>
+          <div class="meta">from [Website/Blog Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Read post →</a>
+        </div>
+        <div class="res-item">
+          <div class="res-type">Post</div>
+          <h4>{Podcast Title}</h4>
+          <div class="meta">from [Website/Blog Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Read post →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLES -->
+    <div class="res-category">
+      <h3>📰 Articles</h3>
+      <div class="res-grid">
+        <div class="res-item">
+          <div class="res-type">Article</div>
+          <h4>[Article Title]</h4>
+          <div class="meta">[Magazine/Publication Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Read article →</a>
+        </div>
+        <div class="res-item">
+          <div class="res-type">Article</div>
+          <h4>[Article Title]</h4>
+          <div class="meta">[Magazine/Publication Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Read article →</a>
+        </div>
+        <div class="res-item">
+          <div class="res-type">Article</div>
+          <h4>[Article Title]</h4>
+          <div class="meta">[Magazine/Publication Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Read article →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEOS -->
+    <div class="res-category">
+      <h3>🎥 Videos</h3>
+      <div class="res-grid">
+        <div class="res-item">
+          <div class="res-type">Video · [mm:ss]</div>
+          <div class="ph-img ph-video" style="height:140px; margin-bottom:12px;"><span>thumbnail · ▶</span></div>
+          <h4>[Video Title]</h4>
+          <div class="meta">[Creator/Channel Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Watch video →</a>
+        </div>
+        <div class="res-item">
+          <div class="res-type">Video · [mm:ss]</div>
+          <div class="ph-img ph-video" style="height:140px; margin-bottom:12px;"><span>thumbnail · ▶</span></div>
+          <h4>[Video Title]</h4>
+          <div class="meta">[Creator/Channel Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Watch video →</a>
+        </div>
+        <div class="res-item">
+          <div class="res-type">Video · [mm:ss]</div>
+          <div class="ph-img ph-video" style="height:140px; margin-bottom:12px;"><span>thumbnail · ▶</span></div>
+          <h4>[Video Title]</h4>
+          <div class="meta">[Creator/Channel Name]</div>
+          <p>[Brief description]</p>
+          <a class="btn-inline">Watch video →</a>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:12px; color:var(--ink-soft); font-style:italic; border-top:1px dashed var(--line-soft); padding-top:14px;">Note: Populate with actual resources during implementation.</p>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div class="section warm" style="text-align:center;">
+    <div class="section-tag">§ 02 · Bottom CTA</div>
+    <div style="max-width:600px; margin: 40px auto;">
+      <h2 class="wf">Ready to start your legacy?</h2>
+      <div class="row" style="justify-content:center; margin-top:20px;">
+        <a class="btn primary large">Start free now →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-top">
+      <div>
+        <div class="brand-name">4EverRemember</div>
+        <p style="color:#aaa; font-size:13px; margin:0 0 10px; max-width:32ch;">Preserve your story for the people you love.</p>
+        <p style="color:#ccc; font-size:13px; margin:0;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcb4b9b0b0b39ce8b9aab9aeaeb9b1b9b1beb9aef2bfb3b1">[email&#160;protected]</a></p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a>Features</a></li>
+          <li><a>Pricing</a></li>
+          <li><a>Resources</a></li>
+          <li><a>Privacy</a></li>
+          <li><a>Terms of Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <div class="socials">
+          <div class="ph-icon sm">X</div>
+          <div class="ph-icon sm">IG</div>
+          <div class="ph-icon sm">IN</div>
+          <div class="ph-icon sm">FB</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 4EverRemember. All rights reserved.</div>
+      <div>Developed by Clarika</div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const pages = {
+    home: document.getElementById('page-home'),
+    services: document.getElementById('page-pillars'),
+    pricing: document.getElementById('page-pricing'),
+    company: document.getElementById('page-company'),
+    resources: document.getElementById('page-resources'),
+  };
+  const labels = {
+    home: document.querySelector('.page-label'),
+    services: document.getElementById('label-pillars'),
+    pricing: document.getElementById('label-pricing'),
+    company: document.getElementById('label-company'),
+    resources: document.getElementById('label-resources'),
+  };
+
+  function show(key) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.page === key));
+    Object.entries(pages).forEach(([k, el]) => {
+      el.classList.toggle('active', k === key);
+    });
+    Object.entries(labels).forEach(([k, el]) => {
+      if (el) el.style.display = k === key ? 'flex' : 'none';
+    });
+    try { localStorage.setItem('4er_wf_page', key); } catch(e){}
+    window.scrollTo(0, 0);
+  }
+
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.page)));
+
+  // Restore
+  try {
+    const saved = localStorage.getItem('4er_wf_page');
+    if (saved && pages[saved]) show(saved);
+  } catch(e){}
+</script>
+
+<!-- ============ TWEAKS PANEL ============ -->
+<script>
+(function(){
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "heroTitle": "Preserve your story forever.",
+    "heroEyebrow": "The #1 digital legacy platform",
+    "heroSub": "Create your digital legacy with AI. Your memories, your voice, your way — in one safe place for the people you love."
+  }/*EDITMODE-END*/;
+
+  const state = { ...TWEAK_DEFAULTS };
+
+  function apply() {
+    document.querySelectorAll('[data-tweak]').forEach(el => {
+      const k = el.getAttribute('data-tweak');
+      if (state[k] !== undefined) el.textContent = state[k];
+    });
+  }
+
+  function setKey(key, val) {
+    state[key] = val;
+    apply();
+    try {
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: val } }, '*');
+    } catch(e) {}
+  }
+
+  // Build panel
+  const panel = document.createElement('div');
+  panel.id = 'tweaks-panel';
+  panel.style.cssText = `
+    position:fixed; right:16px; bottom:16px; z-index:2147483646;
+    width:300px; max-height:calc(100vh - 32px);
+    background:rgba(250,249,247,.92);
+    backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%);
+    border:.5px solid rgba(0,0,0,.1); border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 12px 40px rgba(0,0,0,.18);
+    font:12px/1.45 ui-sans-serif,system-ui,-apple-system,sans-serif;
+    color:#29261b; display:none; flex-direction:column; overflow:hidden;
+  `;
+  panel.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 10px 12px 16px;border-bottom:.5px solid rgba(0,0,0,.06);">
+      <b style="font-size:13px;">Tweaks</b>
+      <button id="tweaks-close" style="border:0;background:transparent;color:rgba(41,38,27,.55);width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:16px;line-height:1;">×</button>
+    </div>
+    <div style="padding:14px 16px 16px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(41,38,27,.5);">Hero</div>
+
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="color:rgba(41,38,27,.72);font-weight:500;">Eyebrow</label>
+        <input data-k="heroEyebrow" type="text" style="width:100%;height:28px;padding:0 9px;border:.5px solid rgba(0,0,0,.12);border-radius:7px;background:#fff;font:inherit;outline:none;" />
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="color:rgba(41,38,27,.72);font-weight:500;">Title</label>
+        <input data-k="heroTitle" type="text" style="width:100%;height:28px;padding:0 9px;border:.5px solid rgba(0,0,0,.12);border-radius:7px;background:#fff;font:inherit;outline:none;" />
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="color:rgba(41,38,27,.72);font-weight:500;">Subtitle</label>
+        <textarea data-k="heroSub" rows="3" style="width:100%;padding:7px 9px;border:.5px solid rgba(0,0,0,.12);border-radius:7px;background:#fff;font:inherit;outline:none;resize:vertical;"></textarea>
+      </div>
+
+      <button id="tweaks-reset" style="margin-top:4px;height:28px;border:.5px solid rgba(0,0,0,.12);border-radius:7px;background:rgba(255,255,255,.7);font:inherit;cursor:pointer;color:#29261b;">Reset to defaults</button>
+    </div>
+  `;
+  document.body.appendChild(panel);
+
+  const inputs = panel.querySelectorAll('[data-k]');
+  function syncInputs() {
+    inputs.forEach(inp => { inp.value = state[inp.getAttribute('data-k')] ?? ''; });
+  }
+
+  inputs.forEach(inp => {
+    inp.addEventListener('input', () => setKey(inp.getAttribute('data-k'), inp.value));
+  });
+
+  panel.querySelector('#tweaks-reset').addEventListener('click', () => {
+    Object.keys(TWEAK_DEFAULTS).forEach(k => setKey(k, TWEAK_DEFAULTS[k]));
+    syncInputs();
+  });
+
+  panel.querySelector('#tweaks-close').addEventListener('click', () => {
+    panel.style.display = 'none';
+    try { window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); } catch(e){}
+  });
+
+  // Host protocol: register listener FIRST, then announce
+  window.addEventListener('message', (e) => {
+    const d = e.data;
+    if (!d || typeof d !== 'object') return;
+    if (d.type === '__activate_edit_mode') { panel.style.display = 'flex'; syncInputs(); }
+    if (d.type === '__deactivate_edit_mode') { panel.style.display = 'none'; }
+  });
+  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch(e){}
+
+  // Initial apply + input sync
+  apply();
+  syncInputs();
+})();
+</script>
+
+</body>
+</html>
